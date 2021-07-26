@@ -2,6 +2,9 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { useAppContext } from '../libs/contextLib'
+import { Auth } from 'aws-amplify'
+import { useHistory } from 'react-router-dom'
 
 const navigation = [
   { name: 'Dashboard', href: '/', current: true },
@@ -13,6 +16,17 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const { userHasAuthenticated } = useAppContext()
+  const history = useHistory()
+
+  async function handleLogout() {
+    await Auth.signOut()
+
+    userHasAuthenticated(false)
+
+    history.push('/login')
+  }
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -50,7 +64,9 @@ export default function Navbar() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          item.current
+                            ? 'bg-gray-900 text-white'
+                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                           'px-3 py-2 rounded-md text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}
@@ -125,6 +141,7 @@ export default function Navbar() {
                             {({ active }) => (
                               <a
                                 href="#"
+                                onClick={handleLogout}
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
@@ -150,7 +167,9 @@ export default function Navbar() {
                   key={item.name}
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    item.current
+                      ? 'bg-gray-900 text-white'
+                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                     'block px-3 py-2 rounded-md text-base font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined}

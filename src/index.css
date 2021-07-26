@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@variants disabled {
+  .disabled {
+    pointer-events: none;
+  }
+}
