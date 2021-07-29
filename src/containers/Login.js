@@ -4,9 +4,10 @@ import { LockClosedIcon } from '@heroicons/react/solid'
 import * as Yup from 'yup'
 import { Auth } from 'aws-amplify'
 import { useAppContext } from '../libs/contextLib'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import LoaderButton from '../components/LoaderButton'
 import { onError } from '../libs/errorLib'
+import ImagePlaceholder from '../components/ImagePlaceholder'
 
 const TextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props)
@@ -33,7 +34,20 @@ export default function Login() {
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Sign in to your account
           </h2>
+          <Link to="/signup">
+            <p className="text-center font-medium text-indigo-600 hover:text-indigo-500">
+              Don't have an account?
+            </p>
+          </Link>
         </div>
+        {/* <div className="bg-gray-300 aspect-h-3 aspect-w-5"></div> */}
+        <ImagePlaceholder
+          imageText="company_logo"
+          altText="Company logo"
+          w="5"
+          h="3"
+        />
+
         <Formik
           initialValues={{ email: '', password: '' }}
           disabled={!Formik.dirty}
