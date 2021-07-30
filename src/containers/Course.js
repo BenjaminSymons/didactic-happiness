@@ -1,6 +1,8 @@
 import { API } from 'aws-amplify'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Navbar from '../components/Navbar'
+import Page from '../containers/Page'
 import { onError } from '../libs/errorLib'
 
 export default function Course() {
@@ -29,8 +31,11 @@ export default function Course() {
   }, [id])
   return (
     <div>
-      <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
-      <p>{course?.description}</p>
+      <Navbar className="flex-grow" />
+      <Page>
+        <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
+        <p>{course?.description}</p>
+      </Page>
     </div>
   )
 }

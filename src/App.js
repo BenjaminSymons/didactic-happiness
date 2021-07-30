@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     onLoad()
-  })
+  }, [])
 
   async function onLoad() {
     try {
@@ -35,12 +35,7 @@ function App() {
     !isAuthenticating && (
       <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
         <div className="flex flex-col h-screen App">
-          {isAuthenticated && <Navbar className="flex-grow" />}
-          <div className="flex-1 pt-4 bg-gray-50">
-            <div className="container min-h-full mx-auto">
-              <Routes />
-            </div>
-          </div>
+          <Routes />
         </div>
       </AppContext.Provider>
     )

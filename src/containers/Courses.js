@@ -4,6 +4,8 @@ import { useAppContext } from '../libs/contextLib'
 import { onError } from '../libs/errorLib'
 import CourseGrid from '../components/CourseGrid'
 import ImagePlaceholder from '../components/ImagePlaceholder'
+import Navbar from '../components/Navbar'
+import Page from './Page'
 
 export default function Courses() {
   const [courses, setCourses] = useState([])
@@ -77,14 +79,17 @@ export default function Courses() {
   function renderCourses() {
     return (
       <div>
-        <h1 className="px-6 text-3xl font-bold text-gray-900 md:px-0">
-          Available Courses
-        </h1>
-        <p className="px-6 mb-6 text-gray-500 md:px-0">
-          All of the courses below are included in your membership.
-        </p>
-        {isLoading && renderCourseListSkeleton()}
-        {!isLoading && renderCoursesList(courses)}
+        <Navbar />
+        <Page>
+          <h1 className="px-6 text-3xl font-bold text-gray-900 md:px-0">
+            Available Courses
+          </h1>
+          <p className="px-6 mb-6 text-gray-500 md:px-0">
+            All of the courses below are included in your membership.
+          </p>
+          {isLoading && renderCourseListSkeleton()}
+          {!isLoading && renderCoursesList(courses)}
+        </Page>
       </div>
     )
   }

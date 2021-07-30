@@ -6,6 +6,7 @@ import NotFound from './containers/NotFound'
 import PrivateRoute from './components/PrivateRoute'
 import Courses from './containers/Courses'
 import Course from './containers/Course'
+import Admin from './containers/Admin'
 
 export default function Routes() {
   return (
@@ -13,6 +14,7 @@ export default function Routes() {
       <PrivateRoute exact path="/" component={Home} />
       <PrivateRoute exact path="/courses" component={Courses} />
       <PrivateRoute exact path="/courses/:id" component={Course} />
+      <PrivateRoute exact path="/admin" component={Admin} />
       <Route exact path="/login">
         <Login />
       </Route>
